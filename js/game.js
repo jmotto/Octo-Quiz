@@ -1,19 +1,19 @@
 // Declaring all elements 
 
-var start = document.getElementById('start');
-var quiz = document.getElementById('quiz');
-var question = document.getElementById('question');
-var choiceA = document.getElementById('A');
-var choiceB = document.getElementById('B');
-var choiceC = document.getElementById('C');
-var choiceD = document.getElementById('D');
+var startContainer = document.querySelector('#start-container');
+var startButton = document.querySelector('#start-button');
+
+var questionContainer = document.querySelector('#question-container');
+var questionOptions = document.querySelector('#question-options');
+
+var answerContainer = document.querySelector('#answer-container');
+
+var highscoreForm = document.querySelector('#highscore-form');
 
 
-// DECLARE 'countdown' number
-// var coundown = 
-// DECLARE 'questions'
-// var questionPosition = 0;
-var questions = [
+
+
+const questions = [
     {
         question: "How many hearts does an octopus have?",
         choiceA: "1",
@@ -51,34 +51,62 @@ var questions = [
 ];
 console.log(questions);
 
-// var currentQuestion = questions[questionPosition];
 
-// DECLARE a 'timerInterval'
-//  var timerInterval = 
-// var currentQuestion = questions[questionPosition]; 
+var coundown; 
+var currentQuestion; 
+var timerInterval;
+
+var questionPosition = 0;
+var currentQuestion = questions[questionPosition]; 
 
 // DECLARE the 'timeEl'
-// var timeEl = document.querySelector('#timer');
+var timeEl = document.querySelector('#timer');
 
+document.querySelector("#start-button").addEventListener("click",startGame);
 // Function 'startGame'
-
+function startGame() {
     // Hide the start screen
-
+    startContainer.setAttribute("hidden", true);
     // Set the question position to 0
-
+    currentQuestion = 0;
     // Display the first question (Display the current question)
-    
-    // displayCurrentQuestion();
+    displayCurrentQuestion();
 
+    time = 75;
+    timerInterval = setInterval(countdown,1000);
+        
+    displayTime();
+
+}
     // Set the starting value of 'countdown'
+function countdown() {
+    time--;
+    displayTime();
+    if (coundown === 0) {
+        endGame();
+    }}
+
+ 
+// stop countdow at zero
+
 
     // Start the timer 'startTimer'
-
+const showTimer = document.querySelector('#timer');
+function displayTime () {
+    showTimer.textContent = time;
+}
         // IF 'countdown' === 0 THEN 'endGame()
 
-// Function 'answerQuestion'
+    
 
-    // var currentQuestion = questions[questionPosition]; 
+// Function 'displayCurrentQuestion'
+function displayCurrentQuestion() {
+    currentQuestion = questions[questionPosition]; 
+
+
+}
+
+    
 
     // Check if the selected answer is correct
 
@@ -101,7 +129,8 @@ console.log(questions);
             // displayCurrentQuestion();
 
 
-// Function 'displayCurrentQuestion'
+
+// Function 'answerQuestion'
 
 // function displayCurrentQuestion = {}
 
