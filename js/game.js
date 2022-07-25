@@ -7,6 +7,7 @@ var questionContainer = document.querySelector('#question-container');
 var questionOptions = document.querySelector('#question-options');
 
 var answerContainer = document.querySelector('#answer-container');
+var answerText = document.querySelector('#answer-text');
 
 var highscoreForm = document.querySelector('#highscore-form');
 
@@ -15,37 +16,45 @@ var highscoreForm = document.querySelector('#highscore-form');
 
 const questions = [
     {
-        question: "How many hearts does an octopus have?",
-        choiceA: "1",
-        choiceB: "2",
-        choiceC: "3",
-        choiceD: "4",
-        correctAnswer: "3",
+        questionText: "How many hearts does an octopus have?",
+        options: [
+            "A. 1",
+            "B. 2",
+            "C. 3",
+            "D. 4",
+        ],
+        answerText: "C. 3",
     },
     {
-        question: "What color blood does an octopus have?",
-        choiceA: "red",
-        choiceB: "blue",
-        choiceC: "black",
-        choiceD: "green",
-        correctAnswer: "blue"
+        questionText: "What color blood does an octopus have?",
+        options: [
+            "A. red",
+            "B. blue",
+            "C. black",
+            "D. green",
+        ],
+        answerText: "B. blue",
     }, 
     {
-        question: "How many arms does an octopus have?",
-        choiceA: "2",
-        choiceB: "4",
-        choiceC: "6",
-        choiceD: "8",
-        correctAnswer: "8"
+        questionOptions: "How many arms does an octopus have?",
+        options: [ 
+            "A. 2",
+            "B. 4",
+            "C. 6",
+            "D. 8",
+        ],
+        answerText: "D. 8",
 
     }, 
     {
-        question: "Which is NOT a species of Octopus?",
-        choiceA: "Mosaic Octopus",
-        choiceB: "Butter Octopus",
-        choiceC: "Dumbo Octopus",
-        choiceD: "Blanket Octopus",
-        correctAnswer: "Butter Octopus"
+        questionOptions: "Which is NOT a species of Octopus?",
+        options: [
+        "A. Mosaic Octopus",
+        "B. Butter Octopus",
+        "C. Dumbo Octopus",
+        "D. Blanket Octopus",
+        ],
+        answerText: "B. Butter Octopus",
 
     },
 ];
@@ -59,7 +68,6 @@ var timerInterval;
 var questionPosition = 0;
 var currentQuestion = questions[questionPosition]; 
 
-// DECLARE the 'timeEl'
 var timeEl = document.querySelector('#timer');
 
 document.querySelector("#start-button").addEventListener("click",startGame);
@@ -86,9 +94,6 @@ function countdown() {
         endGame();
     }}
 
- 
-// stop countdow at zero
-
 
     // Start the timer 'startTimer'
 const showTimer = document.querySelector('#timer');
@@ -101,12 +106,56 @@ function displayTime () {
 
 // Function 'displayCurrentQuestion'
 function displayCurrentQuestion() {
-    currentQuestion = questions[questionPosition]; 
+    let options = questions.options;
 
+    var questionText = document.querySelector("#question-text");
+    questionText.textContent = questions.questionText;
 
+    for (i = 0; i < options; i++) {
+        var option = options[i];
+        var optionButton = document.querySelector("#option" + i );
+        optionButton.textContent = option;
+    }
 }
 
-    
+document.querySelector("#question-options").addEventListener("click", checkAnswer);
+
+function correctAnswer(optionButton) {
+    return optionButton.textContent === questions[currentQuestion].answerText;
+}
+
+function hideResultText() {
+    answerContainer.getElementsByClassName.display = "none";
+}
+
+function checkAnswer(event) {
+    var optionButton = event.target;
+    if(correctAnswer(optionButton)) {
+        answerText.textContent = "Correct!";
+        setTimeout(hideResultText, 1000);
+    } else {
+        answerText.textContent = "Wrong!";
+        setTimeout(hideResultText, 1000);
+        if (time >=10) {
+            time = time - 10;
+            displayTime();
+        } else {
+            time = 0;
+            displayTime();
+            endGame();
+        }
+    }
+
+currentQuestion++;
+if (currentQuestion < questions.length) {
+    displayCurrentQuestion();
+} else {
+    endGame();
+}
+}
+
+console.log(currentQuestion);
+
 
     // Check if the selected answer is correct
 
@@ -138,19 +187,21 @@ function displayCurrentQuestion() {
        
 
 // Function 'endGame'
+function endGame() {
 
     // Hide the questions area
 
     // Show the record high score
 
     // Clear the timer interval to stop it from running
-
-
+    clearInterval(timerInterval);
+}
 // Function 'recordTheHighscore'
     
 
 
 
+// stop countdow at zero
 
 
 // var questionContainer = document.querySelector('#question');
