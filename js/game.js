@@ -9,12 +9,12 @@ var questionOptions = document.querySelector('#question-options');
 var answerContainer = document.querySelector('#answer-container');
 var answerText = document.querySelector('#answer-text');
 
-var highscoreForm = document.querySelector('#highscore-form');
+var highScoreForm = document.querySelector('#high-score-form');
 
 
 
 
-const questions = [
+var questions = [
     {
         questionText: "How many hearts does an octopus have?",
         options: [
@@ -61,7 +61,7 @@ const questions = [
 console.log(questions);
 
 
-var coundown; 
+var countdown; 
 var currentQuestion; 
 var timerInterval;
 
@@ -90,13 +90,13 @@ function startGame() {
 function countdown() {
     time--;
     displayTime();
-    if (coundown === 0) {
+    if (time === 0) {
         endGame();
     }}
 
 
     // Start the timer 'startTimer'
-const showTimer = document.querySelector('#timer');
+var showTimer = document.querySelector('#timer');
 function displayTime () {
     showTimer.textContent = time;
 }
